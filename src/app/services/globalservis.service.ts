@@ -34,7 +34,9 @@ export class GlobalservisService {
 
   public refNotesColl;
 
-  constructor(public firestorage: AngularFireStorage, public afs : AngularFirestore, private toastCtrl : ToastController) { }
+  constructor(public firestorage: AngularFireStorage, public afs : AngularFirestore, private toastCtrl : ToastController) { 
+    this.loadAllFromFirebase();
+  }
 
   public loadAllFromFirebase(){
    this.getNotes().subscribe(res => {
@@ -43,7 +45,7 @@ export class GlobalservisService {
      res.forEach(element => {
        var el = (element.payload.doc.data() as DataNote); 
        this.dataUpload.unshift(el);
-       console.log(el.judul);
+       console.log(el.urlfoto);
      });
    }); 
  
