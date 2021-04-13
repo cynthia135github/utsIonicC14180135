@@ -11,6 +11,7 @@ export class Tab1Page {
 
   jdlNote = "";
   isiNote = "";
+  tglNote;
   nilaiNote = 0;
 
   constructor(public globalservis:GlobalservisService, private toastCtrl: ToastController) {}
@@ -22,9 +23,9 @@ export class Tab1Page {
   }
 
   simpan(){
-    console.log(this.jdlNote.toString() + "-" + this.isiNote.toString() +  "-" + this.nilaiNote.toString());
-    if(this.jdlNote != "" && this.isiNote != "" && this.nilaiNote != 0){
-      this.globalservis.uploadAll(this.jdlNote, this.isiNote, this.nilaiNote);
+    console.log(this.jdlNote.toString() + "-" + this.isiNote.toString() + "-" + this.tglNote +  "-" + this.nilaiNote.toString());
+    if(this.jdlNote != "" && this.isiNote != "" && this.nilaiNote != 0 && this.tglNote != null){
+      this.globalservis.uploadAll(this.jdlNote, this.isiNote,this.tglNote, this.nilaiNote);
       //this.jdlFoto = "";
       //this.tagFoto = "";
     }

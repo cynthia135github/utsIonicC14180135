@@ -112,7 +112,7 @@ export class GlobalservisService {
     }
   }
 
-  public async uploadAll(judul, isi, nilai){
+  public async uploadAll(judul, isi,tgll, nilai){
 
     // ---------------UPLOAD FOTO-----------------
     const namaFilenya = this.dtFotoBaru[0].filePath;
@@ -122,7 +122,7 @@ export class GlobalservisService {
 
     var imgurl = "";
     var namafile = "";
-    var tglNote = new Date();
+    var tglNote = tgll;
 
     await this.firestorage.upload(pathFilenya, FilePhotonya). then((result) => {
       result.ref.getDownloadURL().then((url) => {
