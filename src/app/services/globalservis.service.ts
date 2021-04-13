@@ -212,7 +212,7 @@ export class GlobalservisService {
    public async hapus(i){
      var judulnya = this.dataUpload[i].judul;
      alert(judulnya);
-     this.afs.doc(`${judulnya}`).delete();
+     this.afs.collection("NotesData").doc(`${judulnya}`).delete();
    }
 
   public async uploadEdit(indek,judul, isi,tgll, nilai){
