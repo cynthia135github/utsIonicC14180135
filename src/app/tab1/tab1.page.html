@@ -1,17 +1,48 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      Upload
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <br><br>
+  <ion-label style="margin-left: 10px; margin-right: 10px;">Judul Note</ion-label>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  
+  <ion-item style="margin-left: 10px; margin-right: 10px;">
+    <ion-input [(ngModel)]="jdlNote" placeholder="Pelajaranku"></ion-input>
+  </ion-item>
+
+  <br><br>
+
+  <ion-label style="margin-left: 10px; margin-right: 10px;">Isi Note</ion-label>
+
+  
+  <ion-item style="margin-left: 10px; margin-right: 10px;">
+    <ion-textarea [(ngModel)]="isiNote" rows="4" cols="20" placeholder="Isi Note..."></ion-textarea>
+  </ion-item>
+
+  <br><br>
+
+  <ion-label style="margin-left: 10px; margin-right: 10px;">Nilai Note(1-10)</ion-label>
+
+
+  <ion-item style="margin-left: 10px; margin-right: 10px;">
+    <ion-input [(ngModel)]="nilaiNote" type="number"></ion-input>
+  </ion-item>
+
+  <ion-item *ngFor="let picture of globalservis.dtFotoBaru">
+    <ion-img [src] = "picture.webviewPath" style="margin-left: 15%; width: 200px; height: 180px;"></ion-img>
+  </ion-item>
+
+  <ion-button style="margin-left: 10px; margin-right: 10px;" size="default" expand="full" color="secondary" (click)="simpan()">Save</ion-button>
+
+  <br><br><br><br><br>
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab-button color="warning" (click)="addNewFoto()">
+      <ion-icon name="camera-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
