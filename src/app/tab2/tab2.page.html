@@ -10,13 +10,17 @@
   <ion-list>
     <ion-item *ngFor="let note of globalservis.dataUpload; let i = index">
       <ion-item (click)="detail(i)">
+      
         <ion-img [src]="note.urlfoto" style="width:80px;height: 80px;"></ion-img>
+        
         <ion-label style="margin-left: 15px ;">
           <h1>{{note.judul}}</h1>
           <p>{{note.tgl}}</p>
           <p>{{note.isi}}</p>
         </ion-label>
       </ion-item>
+      <ion-button color="danger" (click)="hapusNote(i)"><ion-icon name="trash-outline"></ion-icon></ion-button>
+      
     </ion-item>
   </ion-list>
 </ion-content>

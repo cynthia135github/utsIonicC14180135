@@ -30,6 +30,9 @@ export class GlobalservisService {
   //Foto Captured
   public dtFotoBaru : Photo[] = [];
 
+  //Foto Captured
+  public dtFotoBaru2 : Photo[] = [];
+
   public dataUpload: DataNote[] = [];
 
   public refNotesColl;
@@ -53,6 +56,23 @@ export class GlobalservisService {
 
   getNotes(){
     return this.afs.collection("NotesData").snapshotChanges();
+  }
+
+  public async editFoto(){
+    this.dtFotoBaru2 = [];
+
+    //Utk Buka Camera lalu ambil Foto
+    const Foto = await Camera.getPhoto({
+      resultType : CameraResultType.Uri,
+      source : CameraSource.Camera,
+      quality : 100
+    });
+    console.log(Foto);
+
+    const fileBaru = await this.saveFotoBaru(Foto);
+
+    this.dtFotoBaru2.unshift(fileBaru);
+
   }
 
 
@@ -175,6 +195,67 @@ export class GlobalservisService {
         
       });
     });
+  }
+
+   //Happus foto yg diinginkan
+   hapusFoto(counter){
+    console.log("indexFoto:"+counter);
+    console.log("nama file dihapus :" + this.dataUpload[counter].namafoto);
+ 
+    var fotoYgdihapus = this.dataUpload[counter].namafoto;
+    var refImage = this.firestorage.storage.ref();
+    refImage.child(fotoYgdihapus).delete();
+ 
+    //this.fotoservice.dataFoto.splice(counter,1);
+   }
+
+   public async hapus(i){
+     var judulnya = this.dataUpload[i].judul;
+     alert(judulnya);
+     this.afs.doc(`${judulnya}`).delete();
+   }
+
+  public async uploadEdit(indek,judul, isi,tgll, nilai){
+
+    //---------------UPLOAD DATA NOTE BARU-----------------
+
+    this.afs.collection("NotesData").doc(judul).set({
+      judul : judul,
+      isi   : isi,
+      tgl   : tgll,
+      nilai : nilai,
+      urlfoto   : this.dataUpload[indek].urlfoto,
+      namafoto  : this.dataUpload[indek].namafoto
+    });
+
+    this.presentToastSukses();
+
+    //HAPUS FOTO LAMA DI FIRESTORAGE
+    //this.hapusFoto(indek);
+
+    // ---------------UPLOAD FOTO-----------------
+    /*const namaFilenya = this.dtFotoBaru[0].filePath;
+    const pathFilenya = `images/${namaFilenya}`;
+
+    const FilePhotonya = this.dtFotoBaru[0].dataImage;
+
+    var imgurl = "";
+    var namafile = "";
+    var tglNote = tgll;
+
+    await this.firestorage.upload(pathFilenya, FilePhotonya). then((result) => {
+      result.ref.getDownloadURL().then((url) => {
+        
+        imgurl = url;
+        console.log("img urlnya: "+ url);
+
+        var arrnamafile = result.ref.fullPath.split("/"); 
+        namafile= arrnamafile[arrnamafile.length - 1]; 
+        console.log("nama filenya dr storage =>"+namafile);
+
+        
+      });
+    });*/
   }
 
   async presentToastJudulKembar() {

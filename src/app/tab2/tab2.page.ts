@@ -12,14 +12,19 @@ export class Tab2Page {
 
   constructor(public globalservis:GlobalservisService, public movePage : NavController) {}
 
-  detail(counter){
-    alert(counter);
-    let parameter: NavigationExtras = { 
+  detail(i){
+    alert(i);
+    let param: NavigationExtras = { 
       queryParams: {
-        idDetail: counter
+        idDetail: i
       }
     };
 
-   this.movePage.navigateForward(["tab3"], parameter);
+   this.movePage.navigateForward(["detailpage"], param);
+  }
+
+  hapusNote(i){
+    this.globalservis.hapus(i);
+    
   }
 }
